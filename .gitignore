@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# YOLO model files (too large for github, downloads automatically)
+*.pt

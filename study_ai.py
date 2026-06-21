@@ -12,6 +12,7 @@ popup_windows = []
 
 sound = None
 sound_playing = False
+phone_spotted = 0
 
 window = Tk()
 window.geometry("1000x600")
@@ -22,13 +23,19 @@ icon = ImageTk.PhotoImage(icon_image)
 window.iconphoto(True, icon)
 window.config(background="#0F0F0F")
 
+# this label displays the webcam stream 
 lbl = Label(window, width=600, height=360, bg="#0F0F0F")
 lbl.place(relx=0.5, rely=0.35, anchor="center")
+
+# this label displays how many time the phone has been detected while the ai is running
+focus_lbl = Label(window, height=2, bg="#7A7A7A", text=f"Phone has been spotted {phone_spotted} times")
+focus_lbl.place(relx=0.1, rely=0.1, anchor="center")
 
 cap = cv2.VideoCapture(0)
 
 model = YOLO("yolo26n.pt")
 
+# opens popup windows when phone is detected
 def show_popups():
     
     for i in range(10):
@@ -42,16 +49,19 @@ def show_popups():
         msg.pack(expand=True)
         popup_windows.append(popup)
 
+# closes all popup windows when phone is put down
 def close_popups():
     for popup in popup_windows:
         popup.destroy()
     popup_windows.clear()
 
+# fuction for displaying video stream and checking if a phone is detected
 def video_stream():
     global sound_playing
     global afterid
     global sound
     global popup_windows
+    global phone_spotted
     ret, frame = cap.read()
 
     results = model(frame)
@@ -66,11 +76,12 @@ def video_stream():
                 x1, y1, x2, y2, = int(box.xyxy[0][0]), int(box.xyxy[0][1]), int(box.xyxy[0][2]), int(box.xyxy[0][3])
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
-
     if phone_detected and not sound_playing:
         sound = playsound("alarm.wav", block=False)
         sound_playing = True
         show_popups()
+        phone_spotted = phone_spotted + 1
+        focus_lbl.config(text=f"Phone has been spotted {phone_spotted} times")
     elif not phone_detected and sound_playing:
         if sound is not None:
             time.sleep(1)  # brief delay to prevent sound flickering when detection is unstable
@@ -94,11 +105,14 @@ def video_stream():
 afterid = None
 is_active = False
 
+# fuction for the activate / deactivate button
 def activate():
     global is_active
     global sound
     global sound_playing
+    global phone_spotted
     is_active = not is_active
+    focus_lbl.config(text="Phone has been spotted 0 times")
 
     if is_active:
         button.config(text="DEACTIVATE AI", bg="#C92626", activebackground="#A11616")
@@ -114,6 +128,7 @@ def activate():
         if sound is not None:
             sound.stop()
         sound_playing = False
+        phone_spotted = 0
 
         
         

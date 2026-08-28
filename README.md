@@ -30,19 +30,21 @@ A python app that uses AI to detect when you pick up your phone while revising a
   - playsound3
   
 # Installation
-1. Clone the repository:
-   - git clone https://github.com/Matty-PW/Study-AI
+1. Clone the repository
 
-2. Navigate to the project folder:
-   - cd Study-AI
+         git clone https://github.com/Matty-PW/Study-AI
 
-3. Install the required libraries:
-   - pip install -r requirements.txt
+3. Navigate to the project folder
 
-4. Run the app:
-   - python study_ai.py
+         cd Study-AI
 
-Note: Python 3.10 or higher is required
+5. Install the required libraries
+
+         pip install -r requirements.txt
+
+7. Run the app
+
+         python study_ai.py
 
 Note: The YOLO model will download automatically the first time you run the app
 

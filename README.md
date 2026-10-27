@@ -1,7 +1,7 @@
 # Study-AI
 A python app that uses AI to detect when you pick up your phone while revising and alerts you to put it down.
 
-# Features
+## Features
 - Live webcam feed displayed in the app
 - Real time AI phone detection using YOLO26
 - Red box drawn around detected phone
@@ -9,7 +9,7 @@ A python app that uses AI to detect when you pick up your phone while revising a
 - Popup windows telling you to lock in
 - Activate / Deactivate button
 
-# How it works
+## How it works
 1. Press the activate button to start the AI
 2. The app opens your webcam and displays a live feed
 3. Every frame is analysed by a YOLO26 AI model looking for a phone
@@ -20,7 +20,7 @@ A python app that uses AI to detect when you pick up your phone while revising a
 5. When you put the phone down everything stops automatically
 6. Press deactivate to turn the AI off
 
-# Requirements
+## Requirements
 - Python 3.10 or higher
 - A webcam
 - The following libraries (installed via requirements.txt):
@@ -29,7 +29,7 @@ A python app that uses AI to detect when you pick up your phone while revising a
   - Ultralytics
   - playsound3
   
-# Installation
+## Installation
 1. Clone the repository
 
          git clone https://github.com/Matty-PW/Study-AI
@@ -48,5 +48,5 @@ A python app that uses AI to detect when you pick up your phone while revising a
 
 Note: The YOLO model will download automatically the first time you run the app
 
-# Credits
+## Credits
 BS Fire Alarm (Sweeping - 1 Hz) by AdamWeeden -- https://freesound.org/s/255181/ -- License: Attribution 3.0
